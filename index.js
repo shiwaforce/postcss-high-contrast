@@ -16,7 +16,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 	var pattern = /(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|(rgb|rgba)\((?:\s*\d{1,3}\s*%?\s*,?\s*){3,4}\))/;
 	
 	function propInArray(array, prop){
-		var SELECTOR_SPLIT_PATTERN = /[. #]/;
+		var SELECTOR_SPLIT_PATTERN = /[. #:]/;
 		var retValue = false;
 		var selectors = prop.split(SELECTOR_SPLIT_PATTERN);
 	
@@ -26,7 +26,6 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 				break;
 			}
 		}
-	
 		return retValue;
 	};
 
@@ -55,9 +54,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 				});
 			}
 			
-			// Seting color for text elements
 			var textSelectors = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'th', 'td'];
-		
 			if (propInArray(textSelectors, rule.selector)){
 				var hasColor = rule.nodes.filter(function(node){
 					var props = ['color'];
@@ -76,34 +73,166 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 			}
 		});
 		
-		css.walkDecls('color', function(decl){
-			if (decl.parent && propInArray(['a'], decl.parent.selector)) {
-				decl.value = opts.linkColor;
-			}
-		});
-		
 		css.walkDecls('background', function(decl){
 			if(pattern.test(decl.value)){
 				var declColor = color(decl.value.match(pattern)[0]).hsl();
 				
-				if(declColor.l > 50){
-					decl.value = '#000';
+				if(declColor.s <= 50 && declColor.l >= 50 || declColor.s >= 50){
+					decl.value = opts.mainBgColor;
 				}
 			}
 		});
-		
-		
-
 		
 		css.walkDecls('background-color', function(decl){
 			if(pattern.test(decl.value)){
 				var declColor = color(decl.value.match(pattern)[0]).hsl();
 				
-				if(declColor.l > 50){
-					decl.value = '#000';
+				if(declColor.s <= 50 && declColor.l >= 50 || declColor.s >= 50 || declColor.l >= 50 ){
+					decl.value = opts.mainBgColor;
 				}
 			}
 		});
+		
+		css.walkDecls('border-color', function(decl){
+			if(pattern.test(decl.value)){
+				var declColor = color(decl.value.match(pattern)[0]).hsl();
+				
+				if(declColor.s <= 50 && declColor.l >= 50 || declColor.s >= 50 || declColor.l >= 50 ){
+					decl.value = opts.altBgColor;
+				}
+			}
+		});
+		css.walkDecls('border-bottom-color', function(decl){
+			if(pattern.test(decl.value)){
+				var declColor = color(decl.value.match(pattern)[0]).hsl();
+				
+				if(declColor.s <= 50 && declColor.l >= 50 || declColor.s >= 50 || declColor.l >= 50 ){
+					decl.value = opts.altBgColor;
+				}
+			}
+		});
+		css.walkDecls('border-top-color', function(decl){
+			if(pattern.test(decl.value)){
+				var declColor = color(decl.value.match(pattern)[0]).hsl();
+				
+				if(declColor.s <= 50 && declColor.l >= 50 || declColor.s >= 50 || declColor.l >= 50 ){
+					decl.value = opts.altBgColor;
+				}
+			}
+		});
+		css.walkDecls('border-left-color', function(decl){
+			if(pattern.test(decl.value)){
+				var declColor = color(decl.value.match(pattern)[0]).hsl();
+				
+				if(declColor.s <= 50 && declColor.l >= 50 || declColor.s >= 50 || declColor.l >= 50 ){
+					decl.value = opts.altBgColor;
+				}
+			}
+		});
+		css.walkDecls('border-right-color', function(decl){
+			if(pattern.test(decl.value)){
+				var declColor = color(decl.value.match(pattern)[0]).hsl();
+				
+				if(declColor.s <= 50 && declColor.l >= 50 || declColor.s >= 50 || declColor.l >= 50 ){
+					decl.value = opts.altBgColor;
+				}
+			}
+		});
+		
+		
+		
+		css.walkDecls('border', function(decl){
+			if(pattern.test(decl.value)){
+				var declColor = color(decl.value.match(pattern)[0]).hsl();
+				
+				if(declColor.s <= 50 && declColor.l >= 50 || declColor.s >= 50 || declColor.l >= 50 ){
+					decl.parent.append({prop: 'border-color', value: opts.altBgColor})
+				}
+			}
+		});
+		
+		css.walkDecls('color', function(decl){
+			if (decl.parent && propInArray(['a'], decl.parent.selector)) {
+				decl.value = opts.linkColor;
+			}
+			
+			if (decl.parent && propInArray(['a:hover'], decl.parent.selector)) {
+				decl.value = opts.linkHoverColor;
+				decl.parent.append({prop: 'background-color', value: opts.linkHoverBgColor})
+			}
+		});
+		
+	}
+});	
+			// if (decl.parent && propInArray(['hover'], decl.parent.selector)) {
+			// 	decl.value = opts.altBgColor;
+			// }
+		// css.walkDecls('color', function(decl){
+		// 	if(pattern.test(decl.value)){
+		// 		var declColor = color(decl.value.match(pattern)[0]).hsl();
+		// 		
+		// 		if(declColor.s < 50 | declColor.l < 50){
+		// 			decl.value = opts.textColor;
+		// 		}
+		// 	}
+		// });
+		// 	
+		// 	// Seting color for text elements
+		// 	var textSelectors = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'th', 'td'];
+		// 
+		// 	if (propInArray(textSelectors, rule.selector)){
+		// 		var hasColor = rule.nodes.filter(function(node){
+		// 			var props = ['color'];
+		// 			return props.indexOf(node.prop) != -1;
+		// 		}).length;
+		// 		
+		// 		if(!hasColor){
+		// 			rule.append({prop: 'color', value: opts.textColor});
+		// 		} else {
+		// 			css.walkDecls(function(decl){
+		// 				if (decl.prop === 'color'){
+		// 					decl.value = opts.textColor;
+		// 				}
+		// 			});
+		// 		}
+		// 	}
+		// });
+		
+		// css.walkDecls('color', function(decl){
+		// 	if (decl.parent && propInArray(['a'], decl.parent.selector)) {
+		// 		decl.value = opts.linkColor;
+		// 	}
+		// });
+		// 
+		// css.walkDecls('background', function(decl){
+		// 	if(pattern.test(decl.value)){
+		// 		var declColor = color(decl.value.match(pattern)[0]).hsl();
+		// 		
+		// 		if(declColor.l > 50){
+		// 			decl.value = opts.mainBgColor;
+		// 		}
+		// 	}
+		// });
+		// 		
+		// css.walkDecls('background-color', function(decl){
+		// 	if(pattern.test(decl.value)){
+		// 		var declColor = color(decl.value.match(pattern)[0]).hsl();
+		// 		
+		// 		if(declColor.l > 50){
+		// 			decl.value = opts.mainBgColor;
+		// 		}
+		// 	}
+		// });
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 			// if (propInArray(['a'], rule.selector)){
 			// 	var hasColor = rule.nodes.filter(function (node) {
@@ -266,7 +395,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 //   }
 // });
 
-		css.walkDecls(function (decl){
+		// css.walkDecls(function (decl){
 			// if(decl.prop === 'background'){
 			// 	if(decl.value != 'inherit' or decl.value != ''){
 			// 		var declColor = color(decl.value).hsl();
@@ -275,7 +404,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 			// 		}
 			// 	}
 			// }
-			if(decl.prop === 'background'){
+			// if(decl.prop === 'background'){
 				// console.log(pattern.test(decl.value), decl.value);
 				
 				// if(pattern.test(decl.value)){
@@ -292,8 +421,8 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 				
 				// converter.rgb( hexToRgb(decl.value) ).hsl();
 				// console.log(hexToRgb(decl.value), decl.value);
-			}
-		});
+		// 	}
+		// });
 
-	};
-});
+	// };
+// });	
