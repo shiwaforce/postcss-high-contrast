@@ -57,7 +57,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 			
 			// Seting color for text elements
 			var textSelectors = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'th', 'td'];
-
+		
 			if (propInArray(textSelectors, rule.selector)){
 				var hasColor = rule.nodes.filter(function(node){
 					var props = ['color'];
@@ -79,6 +79,29 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		css.walkDecls('color', function(decl){
 			if (decl.parent && propInArray(['a'], decl.parent.selector)) {
 				decl.value = opts.linkColor;
+			}
+		});
+		
+		css.walkDecls('background', function(decl){
+			if(pattern.test(decl.value)){
+				var declColor = color(decl.value.match(pattern)[0]).hsl();
+				
+				if(declColor.l > 50){
+					decl.value = '#000';
+				}
+			}
+		});
+		
+		
+
+		
+		css.walkDecls('background-color', function(decl){
+			if(pattern.test(decl.value)){
+				var declColor = color(decl.value.match(pattern)[0]).hsl();
+				
+				if(declColor.l > 50){
+					decl.value = '#000';
+				}
 			}
 		});
 		
@@ -127,7 +150,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		// 	}
 		// 	// decl.value = opts.mainBgColor;
 		// });
-		
+		// 
 		// css.walkDecls('background', function(decl){
 		// 	if (decl.parent && decl.parent.selector === 'body') {
 		// 		decl.value = "#000";
@@ -205,41 +228,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		// };
 		
 		
-		// css.walkDecls('background', function(decl){
-		// 	
-		// 	if (decl.value === '#fff' ){
-		// 		decl.value = "#000";
-		// 	}
-		// 	// decl.value = '#000';
-		// 	if (decl.parent && decl.parent.selector === 'section') {
-		// 		decl.value = "#000";
-		// 	}
-		// 	if(pattern.test(decl.value)){
-		// 		var declColor = color(decl.value.match(pattern)[0]).hsl();
-		// 		// console.log(declColor);
-		// 		
-		// 		if(declColor.l > 50 && declColor.l > 50){
-		// 			decl.value = '#000';
-		// 		}
-		// 		
-		// 	}
-		// 	// var declColor = color(decl.value).hsl();
-		// 	
-		// 	// if(declColor.l > 50 && declColor.l > 50){
-		// 		// decl.value = '#000';
-		// 	// }
-		// 	
-		// 	// console.log(decl.value);
-		// });
-		// css.walkDecls('background-color', function(decl){
-		// 	var declColor = color(decl.value).hsl();
-		// 	
-		// 	if(declColor.l > 50 && declColor.l > 50){
-		// 		decl.value = '#000';
-		// 	}
-		// 	
-		// 	// console.log(decl.value);
-		// });
+		
 		
 		
 		
