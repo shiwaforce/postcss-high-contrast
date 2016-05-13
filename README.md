@@ -1,8 +1,38 @@
-# PostCss High Contrast
-<img align="right" width="57" height="108" title="Dev Kit Main Logo" src="http://adm-designhouse.com/dev-kit-main-logo.png">
+# PostCSS High Contrast
+PostCSS High Contrast is PostCSS plugin that helps automaticaly convert all colors to high contrast. This Plugin gives you ability to create high contrast version of your project with ease.
 
-<img align="right" width="108" height="108" title="Philosopher’s stone, logo of PostCSS" src="http://postcss.github.io/postcss/logo.svg" hspace="20">
+## Why?
+Accessible websites are getting more popular. Some countries even pass laws obliging IT companies create high contrast versions of their projects. Creating high contrast version of your project due some reasons can be painfull.
 
-PostCSS High Contrast Plugin will generate high contrast colors in your css.
 
-# CURENTLY IT IS IN ACTIVE DEVELOPMENT AND TESTING TO ACHIVE BEST RESULTS AND GET AS ACCURATE AS POSSIBLE
+## Example	
+<img title="High Contras Example" src="img/high-contrast-example.png">
+
+
+## Basic Usage
+```
+var postcss = require('postcss');
+var highContrast = require('postcss-high-contrast');
+
+gulp.task('css', function(){
+	var processors = [
+		highContrast()
+	];
+	gulp.src(src + './*.css')
+	.pipe(postcss(processors))
+	.pipe(gulp.dest(root + './'))
+});
+```
+
+## Options
+
+```agressiveColorsOverride```: boolean generates extras css for better color override
+
+Overriding default high contrast colors:   
+```mainBgColor: '#000'``` - Replaces background colors   
+```altBgColor: '#fff'``` - Alternative background color   
+```textHeadingColor: '#fff'``` - Replaces colors for ```h1, h2, h3, h4, h5, h6```    
+```textColor: '#fff'``` - Replaces colors for ```p```   
+```linkColor: '#fcff3c'``` - Replaces links colors   
+```linkHoverBgColor: '#fff'``` - Replaces links hover background colors   
+```linkHoverColor: '#000'``` - Replaces links hover colors   
