@@ -98,13 +98,11 @@ JQuery example:
 function appendHighContrastCss(){
 	var hc = '<link rel="stylesheet" href="/assets/css/high-contrast.css" id="hccss"/>';
 
-
 	if(!$('#highContrastCss').length ){
 		$('head').append(hc);
 	} else {
 		$('#hccss').remove();
 	}
-
 }
 
 $('a.high-contrast').click(loadHighContrastCSS);
