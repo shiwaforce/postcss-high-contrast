@@ -128,36 +128,6 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 			}
 			
 			// Border Colors
-			if (decl.prop === 'border-color') {
-				if (pattern.test(decl.value)) {
-					decl.value = opts.borderColor;
-				}
-			}
-			
-			if (decl.prop === 'border-bottom-color') {
-				if (pattern.test(decl.value)) {
-					decl.value = opts.borderColor;
-				}
-			}
-			
-			if (decl.prop === 'border-top-color') {
-				if (pattern.test(decl.value)) {
-					decl.value = opts.borderColor;
-				}
-			}
-			
-			if (decl.prop === 'border-left-color') {
-				if (pattern.test(decl.value)) {
-					decl.value = opts.borderColor;
-				}
-			}
-			
-			if (decl.prop === 'border-right-color') {
-				if (pattern.test(decl.value)) {
-					decl.value = opts.borderColor;
-				}
-			}
-			
 			if (decl.prop === 'border') {
 				if (pattern.test(decl.value)) {
 					decl.value = decl.value.replace(pattern, opts.borderColor);
@@ -185,6 +155,36 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 			if (decl.prop === 'border-left') {
 				if(pattern.test(decl.value)) {
 					decl.value = decl.value.replace(pattern, opts.borderColor);
+				}
+			}
+			
+			if (decl.prop === 'border-color') {
+				if (pattern.test(decl.value)) {
+					decl.value = opts.borderColor;
+				}
+			}
+			
+			if (decl.prop === 'border-top-color') {
+				if (pattern.test(decl.value)) {
+					decl.value = opts.borderColor;
+				}
+			}
+			
+			if (decl.prop === 'border-right-color') {
+				if (pattern.test(decl.value)) {
+					decl.value = opts.borderColor;
+				}
+			}
+			
+			if (decl.prop === 'border-bottom-color') {
+				if (pattern.test(decl.value)) {
+					decl.value = opts.borderColor;
+				}
+			}
+			
+			if (decl.prop === 'border-left-color') {
+				if (pattern.test(decl.value)) {
+					decl.value = opts.borderColor;
 				}
 			}
 			
