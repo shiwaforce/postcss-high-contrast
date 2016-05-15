@@ -24,12 +24,12 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 	
 	var pattern = /(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|(rgb|rgba)\((?:\s*\d{1,3}\s*%?\s*,?\s*){3,4}\))/;
 	
-	function propInArray(array, prop){
+	function propInArray(array, prop) {
 		var SELECTOR_SPLIT_PATTERN = /[. #:]/;
 		var retValue = false;
 		var selectors = prop.split(SELECTOR_SPLIT_PATTERN);
 	
-		for(var i=0; i < selectors.length; i++){
+		for (var i=0; i < selectors.length; i++){
 			if(array.indexOf(selectors[i]) != -1){
 				retValue = true;
 				break;
@@ -38,42 +38,42 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		return retValue;
 	};
 
-	return function(css, result){
+	return function (css, result) {
 		
-		if(opts.aggressiveHC){
-			css.walkRules(function(rule){
+		if (opts.aggressiveHC) {
+			css.walkRules( function (rule) {
 				
 				// Aggressive HC
-				if (propInArray(opts.aggressiveHCDefaultSelectorList, rule.selector)){
+				if (propInArray(opts.aggressiveHCDefaultSelectorList, rule.selector)) {
 					
-					var hasColor = rule.nodes.filter(function(node){
+					var hasColor = rule.nodes.filter( function (node) {
 						var props = ['color'];
 						return props.indexOf(node.prop) != -1;
 					}).length;
 					
-					if(!hasColor){
+					if (!hasColor) {
 						rule.append({prop: 'color', value: opts.textColor});
 					} else {
-						css.walkDecls(function(decl){
-							if (decl.prop === 'color'){
+						css.walkDecls( function (decl) {
+							if (decl.prop === 'color') {
 								decl.value = opts.textColor;
 							}
 						});
 					}
 				}
 				
-				if (propInArray(opts.aggressiveHCCustomSelectorList, rule.selector)){
+				if (propInArray(opts.aggressiveHCCustomSelectorList, rule.selector)) {
 					
-					var hasColor = rule.nodes.filter(function(node){
+					var hasColor = rule.nodes.filter( function (node) {
 						var props = ['color'];
 						return props.indexOf(node.prop) != -1;
 					}).length;
 					
-					if(!hasColor){
+					if (!hasColor) {
 						rule.append({prop: 'color', value: opts.textColor});
 					} else {
-						css.walkDecls(function(decl){
-							if (decl.prop === 'color'){
+						css.walkDecls( function (decl) {
+							if (decl.prop === 'color') {
 								decl.value = opts.textColor;
 							}
 						});
@@ -83,124 +83,121 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 				// Body Overrides
 				if (rule.selector === 'body') {
 					// Check if body has background or background-color
-					var hasBg = rule.nodes.filter(function (node) {
+					var hasBg = rule.nodes.filter( function (node) {
 						var props = ['background', 'background-color'];
 						return props.indexOf(node.prop) != -1;
 					}).length;
 					
 					// Set background color of body
-					if (!hasBg){
+					if (!hasBg) {
 						rule.append({prop: 'background-color', value: opts.backgroundColor});
 					}
 				}
 			});
 		}
 		
-		// Background Color
-		css.walkDecls('background', function(decl) {
-			if(pattern.test(decl.value)) {
-				decl.value = decl.value.replace(pattern, opts.backgroundColor);
-			}
-		});
-		
-		css.walkDecls('background-color', function(decl) {
-			if(pattern.test(decl.value)) {
-				decl.value = decl.value.replace(pattern, opts.backgroundColor);
-			}
-		});
-		
-		
-		// Color
-		css.walkDecls('color', function(decl){
-			
-			// Link Color
-			if (decl.parent && propInArray(['a'], decl.parent.selector)) {
-				decl.value = opts.linkColor;
+		css.walkDecls( function(decl) {
+			// Background Colors
+			if (decl.prop === 'background') {
+				if (pattern.test(decl.value)) {
+					decl.value = decl.value.replace(pattern, opts.backgroundColor);
+				}
 			}
 			
-			if (decl.parent && propInArray(['a:hover'], decl.parent.selector)) {
-				decl.value = opts.linkHoverColor;
-				decl.parent.append({prop: 'background-color', value: opts.linkHoverBgColor})
+			if (decl.prop === 'background-color') {
+				if (pattern.test(decl.value)) {
+					decl.value = decl.value.replace(pattern, opts.backgroundColor);
+				}
 			}
 			
-			// Text Color
-			if(pattern.test(decl.value) && !propInArray(['a'], decl.parent.selector)){
-				decl.value = opts.textColor;
+			// Colors
+			if (decl.prop === 'color') {
+				if (decl.parent && propInArray(['a'], decl.parent.selector)) {
+					decl.value = opts.linkColor;
+				}
+				
+				if (decl.parent && propInArray(['a:hover'], decl.parent.selector)) {
+					decl.value = opts.linkHoverColor;
+					decl.parent.append({prop: 'background-color', value: opts.linkHoverBgColor})
+				}
+				
+				// Text Color
+				if (pattern.test(decl.value) && !propInArray(['a'], decl.parent.selector)) {
+					decl.value = opts.textColor;
+				}
 			}
-		});
-		
-		
-		// Border
-		css.walkDecls('border-color', function(decl){
-			if(pattern.test(decl.value)){
-				decl.value = opts.borderColor;
-			}
-		});
-		
-		css.walkDecls('border-bottom-color', function(decl){
-			if(pattern.test(decl.value)){
-				decl.value = opts.borderColor;
-			}
-		});
-		css.walkDecls('border-top-color', function(decl){
-			if(pattern.test(decl.value)){
-				decl.value = opts.borderColor;
-			}
-		});
-		
-		css.walkDecls('border-left-color', function(decl){
-			if(pattern.test(decl.value)){
-				decl.value = opts.borderColor;
-			}
-		});
-		
-		css.walkDecls('border-right-color', function(decl){
-			if(pattern.test(decl.value)){
-				decl.value = opts.borderColor;
-			}
-		});
-
-		css.walkDecls('border', function(decl){
-			if(pattern.test(decl.value)){
-				decl.value = decl.value.replace(pattern, opts.borderColor);
-			}
-		});
-		
-		css.walkDecls('border-top', function(decl){
-			if(pattern.test(decl.value)){
-				decl.value = decl.value.replace(pattern, opts.borderColor);
-			}
-		});
-		
-		css.walkDecls('border-right', function(decl){
-			if(pattern.test(decl.value)){
-				decl.value = decl.value.replace(pattern, opts.borderColor);
-			}
-		});
-		
-		css.walkDecls('border-bottom', function(decl){
-			if(pattern.test(decl.value)){
-				decl.value = decl.value.replace(pattern, opts.borderColor);
-			}
-		});
-		
-		css.walkDecls('border-left', function(decl){
-			if(pattern.test(decl.value)){
-				decl.value = decl.value.replace(pattern, opts.borderColor);
-			}
-		});
-		
-		
-		// Shadow
-		if(opts.disableShadow){
-			css.walkDecls('box-shadow', function(decl){
-				decl.value = 'none';
-			});
 			
-			css.walkDecls('text-shadow', function(decl){
-				decl.value = 'none';
-			});
-		}
-		
+			// Border Colors
+			if (decl.prop === 'border-color') {
+				if (pattern.test(decl.value)) {
+					decl.value = opts.borderColor;
+				}
+			}
+			
+			if (decl.prop === 'border-bottom-color') {
+				if (pattern.test(decl.value)) {
+					decl.value = opts.borderColor;
+				}
+			}
+			
+			if (decl.prop === 'border-top-color') {
+				if (pattern.test(decl.value)) {
+					decl.value = opts.borderColor;
+				}
+			}
+			
+			if (decl.prop === 'border-left-color') {
+				if (pattern.test(decl.value)) {
+					decl.value = opts.borderColor;
+				}
+			}
+			
+			if (decl.prop === 'border-right-color') {
+				if (pattern.test(decl.value)) {
+					decl.value = opts.borderColor;
+				}
+			}
+			
+			if (decl.prop === 'border') {
+				if (pattern.test(decl.value)) {
+					decl.value = decl.value.replace(pattern, opts.borderColor);
+				}
+			}
+			
+			if (decl.prop === 'border-top') {
+				if (pattern.test(decl.value)) {
+					decl.value = decl.value.replace(pattern, opts.borderColor);
+				}
+			}
+			
+			if (decl.prop === 'border-right') {
+				if (pattern.test(decl.value)) {
+					decl.value = decl.value.replace(pattern, opts.borderColor);
+				}
+			}
+			
+			if (decl.prop === 'border-bottom') {
+				if (pattern.test(decl.value)) {
+					decl.value = decl.value.replace(pattern, opts.borderColor);
+				}
+			}
+			
+			if (decl.prop === 'border-left') {
+				if(pattern.test(decl.value)) {
+					decl.value = decl.value.replace(pattern, opts.borderColor);
+				}
+			}
+			
+			// Shadow
+			if (opts.disableShadow) {
+				if (decl.prop === 'box-shadow') {
+					decl.value = 'none';
+				}
+				
+				if (decl.prop === 'text-shadow') {
+					decl.value = 'none';
+				}
+			}
+		});
 	}
 });
