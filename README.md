@@ -36,7 +36,7 @@ postcss([
 ```
 ## How It works?
 #### None Aggressive Mode
-PostCSS High Contrast plugin will find all colors and replace them to high contrast ones.
+PostCSS High Contrast plugin will find all colors and replace them to high contrast ones.  
 input.css:
 ```css
 body {
@@ -60,7 +60,8 @@ a {
 }
 ```
 #### Aggressive Mode
-In addition to replacing colors to high contrast colors, there is "Aggressive Mode". "Aggressive Mode" (```aggressiveHC```) is enabled by default. If selector doesn't have ```color``` property it will automateclly append it for increasing specificity and providing more accurate results.
+In addition to replacing colors to high contrast colors, there is "Aggressive Mode". "Aggressive Mode" (```aggressiveHC```) is enabled by default. If selector doesn't have ```color``` property it will automateclly append it for increasing specificity and providing more accurate results.  
+input.css:
 ```css
 h1 {
 	font-size: 48px;
