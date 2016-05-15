@@ -15,7 +15,6 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		textColor: '#fff',
 		
 		linkColor: '#fcff3c',
-		linkHoverBgColor: '#fff',
 		linkHoverColor: '#000',
 		
 		borderColor: '#fff',
@@ -43,6 +42,8 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		
 		if(opts.aggressiveHC){
 			css.walkRules(function(rule){
+				
+				// Aggressive HC
 				if (propInArray(opts.aggressiveHCDefaultSelectorList, rule.selector)){
 					
 					var hasColor = rule.nodes.filter(function(node){
@@ -78,19 +79,33 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 						});
 					}
 				}
+				
+				// Body Overrides
+				if (rule.selector === 'body') {
+					// Check if body has background or background-color
+					var hasBg = rule.nodes.filter(function (node) {
+						var props = ['background', 'background-color'];
+						return props.indexOf(node.prop) != -1;
+					}).length;
+					
+					// Set background color of body
+					if (!hasBg){
+						rule.append({prop: 'background-color', value: opts.backgroundColor});
+					}
+				}
 			});
 		}
 		
 		// Background Color
 		css.walkDecls('background', function(decl) {
 			if(pattern.test(decl.value)) {
-				decl.value = decl.value.replace(pattern, opts.mainBgColor);
+				decl.value = decl.value.replace(pattern, opts.backgroundColor);
 			}
 		});
 		
 		css.walkDecls('background-color', function(decl) {
 			if(pattern.test(decl.value)) {
-				decl.value = decl.value.replace(pattern, opts.mainBgColor);
+				decl.value = decl.value.replace(pattern, opts.backgroundColor);
 			}
 		});
 		
