@@ -1,44 +1,119 @@
 # PostCSS High Contrast
+<img align="right" width="57" height="108" title="Dev Kit Main Logo" src="http://adm-designhouse.com/dev-kit-logo.png">
+
+<img align="right" width="108" height="108" title="Philosopher’s stone, logo of PostCSS" src="http://postcss.github.io/postcss/logo.svg" hspace="20">
 PostCSS High Contrast is PostCSS plugin that helps automaticaly convert all colors to high contrast. This Plugin gives you ability to create high contrast version of your project with ease.
 
 ## Why?
 Accessible websites are getting more popular. Some countries even pass laws obliging IT companies create high contrast versions of their projects. Creating high contrast version of your project due some reasons can be painfull.
 
 
-## Example	
+## Live Example 	
 <img title="High Contras Example" src="img/high-contrast-example.png">
 
 
 ## Basic Usage
-```
-var postcss = require('postcss');
-var highContrast = require('postcss-high-contrast');
+```js
+postcss([ require('postcss-high-contrast')({
+	highContrast({
+		aggressiveHC: true,
+		aggressiveHCDefaultSelectorList: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'th', 'td'],
+		aggressiveHCCustomSelectorList: ['div', 'span'],
+		
+		backgroundColor: '#000',
+		altBgColor: '#fff',
+		
+		textColor: '#fff',
+		
+		linkColor: '#fcff3c',
+		linkHoverColor: '#fcff3c',
+		
+		borderColor: '#fff',
+		disableShadow: true
+	})
+})]);
 
-gulp.task('css', function(){
-	var processors = [
-		highContrast({
-			aggressiveHC: true,
-			aggressiveHCDefaultSelectorList: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'th', 'td'],
-			aggressiveHCCustomSelectorList: ['div', 'span'],
-			
-			backgroundColor: '#000',
-			altBgColor: '#fff',
-			
-			textColor: '#fff',
-			
-			linkColor: '#fcff3c',
-			linkHoverBgColor: '#fff',
-			linkHoverColor: '#000',
-			
-			borderColor: '#fff',
-			disableShadow: true
-		})
-	];
-	gulp.src(src + './*.css')
-	.pipe(postcss(processors))
-	.pipe(gulp.dest(root + './'))
-});
 ```
+#### None Aggressive
+input.css:
+```css
+body {
+	background: #fff;
+	color: #000;
+}
+
+a {
+	color: #0b39e1;
+}
+```
+oputput.css:
+```css
+body {
+	background: #000;
+	color: #fff;
+}
+
+a {
+	color: #fcff3c;
+}
+```
+#### Aggressive
+```aggressiveHC``` is enabled by default. If selector doesn't have ```color``` property it will automateclly append it for increasing specificity and providing more accurate results.
+```css
+h1 {
+	font-size: 48px;
+	margin: 0;
+	padding: 0 24px;
+	width: 100%;
+}
+
+p {
+	font-size: 48px;
+	margin: 0 0 24px;
+}
+```
+oputput.css:
+```css
+h1 {
+	color: #fff;
+	font-size: 48px;
+	margin: 0;
+	padding: 0 24px;
+	width: 100%;
+}
+
+p {
+	color: #fff;
+	font-size: 48px;
+	margin: 0 0 24px;
+}
+```
+Use ```aggressiveHCDefaultSelectorList``` and ```aggressiveHCCustomSelectorList``` to define own lists of properties.
+
+
+#### Appending to wepbage
+Using this plugin it's better to generate new high contrast version of css file. Than it is very easy to add/append high contrast version css to a webpage using JavaScript.  
+JQuery example: 
+```js
+function appendHighContrastCss(){
+	var hc = '<link rel="stylesheet" href="/assets/css/high-contrast.css" id="hccss"/>';
+
+
+	if(!$('#highContrastCss').length ){
+		$('head').append(hc);
+	} else {
+		$('#hccss').remove();
+	}
+
+}
+
+$('a.high-contrast').click(loadHighContrastCSS);
+	appendHighContrastCss();
+}
+```
+Tip: use cookeis to remember turned on high contrast css on different sessions and pages.
+
+ 
 
 ## Options
 | Name                              | Default Value                                                 | Description    |
@@ -54,3 +129,7 @@ gulp.task('css', function(){
 | `linkHoverColor`                  | `#000`                                                        | Link hover color |
 | `borderColor`                     | `#fff`                                                        | Border color |
 | `disableShadow`                   | `true`                                                        | Disable shadow |
+
+
+## Used by
+[Magyar Posta](https://www.posta.hu)
