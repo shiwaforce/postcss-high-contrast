@@ -2,10 +2,10 @@
 <img align="right" width="57" height="108" title="Dev Kit Main Logo" src="http://adm-designhouse.com/dev-kit-logo.png">
 
 <img align="right" width="108" height="108" title="Philosopher’s stone, logo of PostCSS" src="http://postcss.github.io/postcss/logo.svg" hspace="20">
-PostCSS High Contrast is PostCSS plugin that helps automaticaly convert all colors to high contrast. This Plugin gives you ability to create high contrast version of your project with ease.
+PostCSS High Contrast is PostCSS plugin that helps automatically convert all colors to high contrast. This Plugin gives you ability to create high contrast version of your project with ease.
 
 ## Why?
-Accessible websites are getting more popular. Some countries even pass laws obliging IT companies create high contrast versions of their projects. Creating high contrast version of your project due some reasons can be painfull.
+Accessible websites are getting more popular. Some countries even pass laws obliging IT companies create high contrast versions of their projects. Creating high contrast version of your project due some reasons can be painful.
 
 
 ## Live Example 	
@@ -60,7 +60,7 @@ a {
 }
 ```
 #### Aggressive Mode
-In addition to replacing colors to high contrast colors, there is "Aggressive Mode". "Aggressive Mode" (```aggressiveHC```) is enabled by default. If selector doesn't have ```color``` property it will automateclly append it for increasing specificity and providing more accurate results.  
+In addition to replacing colors to high contrast colors, there is "Aggressive Mode". "Aggressive Mode" (```aggressiveHC```) is enabled by default. If selector doesn't have ```color``` property it will automatically append it for increasing specificity and providing more accurate results.  
 input.css:
 ```css
 h1 {
@@ -112,7 +112,7 @@ $('a.high-contrast').click(loadHighContrastCSS);
 	appendHighContrastCss();
 }
 ```
-Tip: use cookeis to remember turned on high contrast css on different sessions and pages.
+Tip: use cookies to remember turned on high contrast css on different sessions and pages.
 
  
 
