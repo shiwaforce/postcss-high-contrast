@@ -14,8 +14,8 @@ Accessible websites are getting more popular. Some countries even pass laws obli
 
 ## Basic Usage
 ```js
-postcss([ require('postcss-high-contrast')({
-	highContrast({
+postcss([
+	require('postcss-high-contrast')({
 		aggressiveHC: true,
 		aggressiveHCDefaultSelectorList: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'th', 'td'],
 		aggressiveHCCustomSelectorList: ['div', 'span'],
@@ -31,7 +31,7 @@ postcss([ require('postcss-high-contrast')({
 		borderColor: '#fff',
 		disableShadow: true
 	})
-})]);
+]);
 
 ```
 #### None Aggressive
