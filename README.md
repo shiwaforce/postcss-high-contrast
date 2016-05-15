@@ -45,17 +45,17 @@ gulp.task('css', function(){
 |:----------------------------------|:--------------------------------------------------------------|:---------------|
 | `aggressiveHC`                    | `true`                                                        | Will append properties even if they do not exist |
 | `aggressiveHCDefaultSelectorList` | `['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'th', 'td']` | Default list of selectors for aggressive property append |
-| `aggressiveHCCustomSelectorList`  | `['span']`                                                    | Custom list of selectors for aggressive property append|
+| `aggressiveHCCustomSelectorList`  | `['span']`                                                    | Custom list of selectors for aggressive property append |
+|                                   |                                                               |    |
+| `backgroundColor`                 | `#000`                                                        | Backgound color |
+| `altBgColor`                      | `#fff`                                                        | Alternative background color |
+|                                   |                                                               |    |
+| `textColor`                       | `#fff`                                                        | Text color |
+|                                   |                                                               |    |
+| `linkColor`                       | `#fcff3c`                                                     | Link color |
+| `linkHoverBgColor`                | `#fff`                                                        | Link hover bacground color |
+| `linkHoverColor`                  | `#000`                                                        | Link hover color |
+|                                   |                                                               |    |
+| `borderColor`                     | `#fff`                                                        | Border color |
 |                                   |                                                               ||
-| `backgroundColor`                 | `#000`                                                        | Backgound color|
-| `altBgColor`                      | `#fff`                                                        | Alternative Background color|
-|                                   |                                                               ||
-| `textColor`                       | `#fff`                                                        | Text color|
-|                                   |                                                               ||
-| `linkColor`                       | `#fcff3c`                                                     | Link color|
-| `linkHoverBgColor`                | `#fff`                                                        | Link hover bacground color|
-| `linkHoverColor`                  | `#000`                                                        | Link hover color|
-|                                   |                                                               ||
-| `borderColor`                     | `#fff`                                                        | Border color|
-|                                   |                                                               ||
-| `disableShadow`                   | `true`                                                        | Disable shadow|
+| `disableShadow`                   | `true`                                                        | Disable shadow |
