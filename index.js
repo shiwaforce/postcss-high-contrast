@@ -1,5 +1,4 @@
 var postcss = require('postcss');
-var color = require("color");
 var extend = require('util')._extend;
 
 module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
