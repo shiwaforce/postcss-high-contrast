@@ -1,6 +1,6 @@
 {
 	"name": "postcss-high-contrast",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"description": "High contrast plugin for PostCSS",
 	"main": "index.js",
 	"derictories":{
@@ -16,7 +16,7 @@
 	"keywords":[
 		"postcss", "postcss-plugin", "high contrast", "contrast", "accessibility", "web accessibility" 
 	],
-	 "author": "ADM DESIGNHOUSE <admdh.com@gmail.com>",
+	 "author": "Eduard Pocstar <admdh.com@gmail.com>",
 	"license": "MIT",
 	"devDependencies": {},
     "dependencies": {
