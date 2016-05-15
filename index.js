@@ -3,23 +3,17 @@ var extend = require('util')._extend;
 
 module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 	opts = extend({
-		
 		aggressiveHC: true,
 		aggressiveHCDefaultSelectorList: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'th', 'td'],
 		aggressiveHCCustomSelectorList: ['div', 'span'],
-		
 		backgroundColor: '#000',
 		altBgColor: '#fff',
-		
 		textColor: '#fff',
-		
 		linkColor: '#fcff3c',
 		linkHoverColor: '#000',
-		
 		borderColor: '#fff',
 		disableShadow: true
-		
-	}, opts);
+	});
 	
 	var pattern = /(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|(rgb|rgba)\((?:\s*\d{1,3}\s*%?\s*,?\s*){3,4}\))/;
 	
@@ -29,26 +23,26 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		var selectors = prop.split(SELECTOR_SPLIT_PATTERN);
 	
 		for (var i=0; i < selectors.length; i++){
-			if(array.indexOf(selectors[i]) != -1){
+			if(array.indexOf(selectors[i]) !== -1){
 				retValue = true;
 				break;
 			}
 		}
 		return retValue;
-	};
+	}
 
-	return function (css, result) {
+	return function (css) {
 		
 		if (opts.aggressiveHC) {
 			css.walkRules( function (rule) {
 				
+				var hasColor = rule.nodes.filter( function (node) {
+					var props = ['color'];
+					return props.indexOf(node.prop) !== -1;
+				}).length;
+				
 				// Aggressive HC
 				if (propInArray(opts.aggressiveHCDefaultSelectorList, rule.selector)) {
-					
-					var hasColor = rule.nodes.filter( function (node) {
-						var props = ['color'];
-						return props.indexOf(node.prop) != -1;
-					}).length;
 					
 					if (!hasColor) {
 						rule.append({prop: 'color', value: opts.textColor});
@@ -62,11 +56,6 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 				}
 				
 				if (propInArray(opts.aggressiveHCCustomSelectorList, rule.selector)) {
-					
-					var hasColor = rule.nodes.filter( function (node) {
-						var props = ['color'];
-						return props.indexOf(node.prop) != -1;
-					}).length;
 					
 					if (!hasColor) {
 						rule.append({prop: 'color', value: opts.textColor});
@@ -84,7 +73,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 					// Check if body has background or background-color
 					var hasBg = rule.nodes.filter( function (node) {
 						var props = ['background', 'background-color'];
-						return props.indexOf(node.prop) != -1;
+						return props.indexOf(node.prop) !== -1;
 					}).length;
 					
 					// Set background color of body

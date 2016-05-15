@@ -25,6 +25,7 @@
     "eslint-config-postcss": "^2.0.2"
   },
   "scripts": {
+    "lint": "eslint *.js --ignore-path .gitignore && jscs *.js",
     "test": "ava && eslint test/test.js"
   },
   "eslintConfig": {
