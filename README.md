@@ -48,7 +48,7 @@ a {
 	color: #0b39e1;
 }
 ```
-oputput.css:
+output.css:
 ```css
 body {
 	background: #000;
@@ -75,7 +75,7 @@ p {
 	margin: 0 0 24px;
 }
 ```
-oputput.css:
+output.css:
 ```css
 h1 {
 	color: #fff;
