@@ -9,7 +9,7 @@ Accessible websites are getting more popular. Some countries even pass laws obli
 
 
 ## Live Example 	
-<img title="High Contras Example" src="img/high-contrast-example.png">
+<img title="High Contras Example" src="img/high-contrast-example-4.png">
 
 
 ## Basic Usage
