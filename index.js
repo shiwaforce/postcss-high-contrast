@@ -11,6 +11,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		textColor: '#fff',
 		linkColor: '#fcff3c',
 		linkHoverColor: '#000',
+		linkHoverBgColor: '#000',
 		borderColor: '#fff',
 		disableShadow: true
 	});
