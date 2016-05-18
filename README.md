@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/admdh/postcss-increase-text-sizes.svg?branch=master)](https://travis-ci.org/admdh/postcss-increase-text-sizes)
 # PostCSS High Contrast
 <img align="right" width="57" height="108" title="Dev Kit Main Logo" src="http://adm-designhouse.com/dev-kit-logo.png">
 
