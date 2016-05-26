@@ -135,3 +135,6 @@ Tip: use cookies to remember turned on high contrast css on different sessions a
 
 ## Used by
 [Magyar Posta](https://www.posta.hu)
+
+## Works great with: 
+[PostCSS Increase Text Sizes] https://github.com/admdh/postcss-increase-text-sizes
