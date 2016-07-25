@@ -32,7 +32,7 @@ postcss([
 		borderColor: '#fff',
 		disableShadow: true,
 
-		imageContrast: 'invert(100%)',
+		imageFilter: 'invert(100%)',
 		imageSelectors: ['img']
 	})
 ]);
