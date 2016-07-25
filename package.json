@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/admdh/postcss-high-contrast",
   "dependencies": {
+    "object-assign": "^4.1.0",
     "postcss": "^5.0.21"
   },
   "devDependencies": {
