@@ -1,8 +1,8 @@
 var postcss = require('postcss');
-var extend = require('util')._extend;
+var assign = require('object-assign');
 
 module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
-	opts = extend({
+	opts = assign({
 		aggressiveHC: true,
 		aggressiveHCDefaultSelectorList: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'th', 'td'],
 		aggressiveHCCustomSelectorList: ['div', 'span'],
@@ -14,7 +14,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		linkHoverBgColor: '#000',
 		borderColor: '#fff',
 		disableShadow: true
-	});
+	}, opts);
 
 	var pattern = /(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|(rgb|rgba)\((?:\s*\d{1,3}\s*%?\s*,?\s*){3,4}\))/;
 

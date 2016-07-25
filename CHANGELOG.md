@@ -1,3 +1,5 @@
+# 1.0.3
+- options bug fix
 # 1.0.2
 - eslint 3.1.1
 - travis update
