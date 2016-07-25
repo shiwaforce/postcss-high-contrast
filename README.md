@@ -128,7 +128,7 @@ input.css:
  	color: #fff;
  }
  ```
- For merging CSS selectors use CSS minifiers like [CSSNano](https://github.com/ben-eb/cssnano) or [CSSO](https://github.com/css/csso).
+ For merging CSS selectors use CSS minifiers like [CSSNano](https://github.com/ben-eb/cssnano) or [CSSO](https://github.com/css/csso).  
  If you are using PostCSS High Contrast Plugins with some other PostCSS Plugins like [PostCSS Increase Text Sizes](https://github.com/admdh/postcss-increase-text-sizes) you might need some other properties to remain. For this case there is ```CSSPropsWhiteList``` option that prevents from deleting css properties:
  ```
  CSSPropsWhiteList: ['background', 'background-color', 'color', 'border', 'border-top', 'border-bottom', 'border-left', 'border-right', 'border-color', 'border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color', 'box-shadow', 'filter', 'text-shadow']
