@@ -9,7 +9,7 @@ PostCSS High Contrast is PostCSS plugin that helps automatically convert all col
 Accessible websites are getting more popular. Some countries even pass laws obliging IT companies create high contrast versions of their projects. Creating high contrast version of your project due some reasons can be painful.
 
 
-## Live Example 	
+## Live Example
 <img title="High Contras Example" src="img/high-contrast-example-4.png">
 
 
@@ -20,24 +20,27 @@ postcss([
 		aggressiveHC: true,
 		aggressiveHCDefaultSelectorList: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'th', 'td'],
 		aggressiveHCCustomSelectorList: ['div', 'span'],
-		
+
 		backgroundColor: '#000',
 		altBgColor: '#fff',
-		
+
 		textColor: '#fff',
-		
+
 		linkColor: '#fcff3c',
 		linkHoverColor: '#fcff3c',
-		
+
 		borderColor: '#fff',
-		disableShadow: true
+		disableShadow: true,
+
+		imageContrast: 'invert(100%)',
+		imageSelectors: ['img']
 	})
 ]);
 
 ```
 ## How It works?
 #### None Aggressive Mode
-PostCSS High Contrast plugin will find all colors and replace them to high contrast ones.  
+PostCSS High Contrast plugin will find all colors and replace them to high contrast ones.
 input.css:
 ```css
 body {
@@ -61,7 +64,7 @@ a {
 }
 ```
 #### Aggressive Mode
-In addition to replacing colors to high contrast colors, there is "Aggressive Mode". "Aggressive Mode" (```aggressiveHC```) is enabled by default. If selector doesn't have ```color``` property it will automatically append it for increasing specificity and providing more accurate results.  
+In addition to replacing colors to high contrast colors, there is "Aggressive Mode". "Aggressive Mode" (```aggressiveHC```) is enabled by default. If selector doesn't have ```color``` property it will automatically append it for increasing specificity and providing more accurate results.
 input.css:
 ```css
 h1 {
@@ -96,8 +99,8 @@ Use ```aggressiveHCDefaultSelectorList``` and ```aggressiveHCCustomSelectorList`
 
 
 #### Appending to wepbage
-Using this plugin it's better to generate new high contrast version of css file. Than it is very easy to add/append high contrast version css to a webpage using JavaScript.  
-JQuery example: 
+Using this plugin it's better to generate new high contrast version of css file. Than it is very easy to add/append high contrast version css to a webpage using JavaScript.
+JQuery example:
 ```js
 function appendHighContrastCss(){
 	var hc = '<link rel="stylesheet" href="/assets/css/high-contrast.css" id="hccss"/>';
@@ -115,7 +118,7 @@ $('a.high-contrast').click(loadHighContrastCSS);
 ```
 Tip: use cookies to remember turned on high contrast css on different sessions and pages.
 
- 
+
 
 ## Options
 | Name                              | Default Value                                                 | Description    |
@@ -131,10 +134,12 @@ Tip: use cookies to remember turned on high contrast css on different sessions a
 | `linkHoverColor`                  | `#000`                                                        | Link hover color |
 | `borderColor`                     | `#fff`                                                        | Border color |
 | `disableShadow`                   | `true`                                                        | Disable shadow |
+| `imageFilter`                     | `false`/`invert(100%)`/`grayscale(100%)`/`contrast(200%)`     | Image Filter (disabled by default). `false` to disable. Any css filter option can be passed|
+| `imageSelectors`                  | `['img']`                                                     | Default list of image selectors to apply `imageFilter`|
 
 
 ## Used by
 [Magyar Posta](https://www.posta.hu)
 
-## Works great with: 
+## Works great with:
 [PostCSS Increase Text Sizes](https://github.com/admdh/postcss-increase-text-sizes)

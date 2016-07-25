@@ -1,6 +1,6 @@
 {
   "name": "postcss-high-contrast",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "PostCSS High Contrast is PostCSS plugin that helps automaticaly converts all colors to high contrast",
   "keywords": [
     "postcss",

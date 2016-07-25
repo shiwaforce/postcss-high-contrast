@@ -13,7 +13,9 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		linkHoverColor: '#000',
 		linkHoverBgColor: '#000',
 		borderColor: '#fff',
-		disableShadow: true
+		disableShadow: true,
+		imageFilter: 'invert(100%)',
+		imageSelectors: ['img']
 	});
 
 	var pattern = /(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|(rgb|rgba)\((?:\s*\d{1,3}\s*%?\s*,?\s*){3,4}\))/;
@@ -194,5 +196,27 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 				}
 			}
 		});
+
+		if(opts.imageFilter) {
+			css.walkRules( function (rule) {
+				var hasFilter = rule.nodes.filter( function (node) {
+					var props = ['filter'];
+					return props.indexOf(node.prop) !== -1;
+				}).length;
+
+				if (propInArray(opts.imageSelectors, rule.selector)) {
+
+					if (!hasFilter) {
+						rule.append({ prop: 'filter', value: opts.imageFilter });
+					} else {
+						css.walkDecls( function (decl) {
+							if (decl.prop === 'filter') {
+								decl.value = opts.imageFilter;
+							}
+						});
+					}
+				}
+			});
+		}
 	};
 });
