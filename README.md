@@ -33,7 +33,12 @@ postcss([
 		disableShadow: true,
 
 		imageFilter: 'invert(100%)',
-		imageSelectors: ['img']
+		imageSelectors: ['img'],
+
+		removeCSSProps: false,
+        CSSPropsWhiteList: ['background', 'background-color', 'color', 'border', 'border-top', 'border-bottom',
+            'border-left', 'border-right', 'border-color', 'border-top-color', 'border-right-color',
+            'border-bottom-color', 'border-left-color', 'box-shadow', 'filter', 'text-shadow']
 	})
 ]);
 
@@ -97,6 +102,37 @@ p {
 ```
 Use ```aggressiveHCDefaultSelectorList``` and ```aggressiveHCCustomSelectorList``` to define own lists of properties.
 
+#### Removing Unused CSS
+For better css optimization there is an option to remove unused css.
+input.css:
+ ```css
+ h1 {
+ 	font-size: 48px;
+ 	margin: 0;
+ 	padding: 0 24px;
+ 	width: 100%;
+ }
+
+ p {
+ 	font-size: 48px;
+ 	margin: 0 0 24px;
+ }
+ ```
+ output.css:
+ ```css
+ h1 {
+ 	color: #fff;
+ }
+
+ p {
+ 	color: #fff;
+ }
+ ```
+ For merging CSS selectors use CSS minifiers like [CSSNano](https://github.com/ben-eb/cssnano) or [CSSO](https://github.com/css/csso).
+ If you are using PostCSS High Contrast Plugins with some other PostCSS Plugins like [PostCSS Increase Text Sizes](https://github.com/admdh/postcss-increase-text-sizes) you might need some other properties to remain. For this case there is ```CSSPropsWhiteList``` option that prevents from deleting css properties:
+ ```
+ CSSPropsWhiteList: ['background', 'background-color', 'color', 'border', 'border-top', 'border-bottom', 'border-left', 'border-right', 'border-color', 'border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color', 'box-shadow', 'filter', 'text-shadow']
+ ```
 
 #### Appending to wepbage
 Using this plugin it's better to generate new high contrast version of css file. Than it is very easy to add/append high contrast version css to a webpage using JavaScript.
@@ -121,21 +157,27 @@ Tip: use cookies to remember turned on high contrast css on different sessions a
 
 
 ## Options
-| Name                              | Default Value                                                 | Description    |
-|:----------------------------------|:--------------------------------------------------------------|:---------------|
-| `aggressiveHC`                    | `true`                                                        | Will append properties even if they do not exist |
-| `aggressiveHCDefaultSelectorList` | `['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'th', 'td']` | Default list of selectors for aggressive property append |
-| `aggressiveHCCustomSelectorList`  | `['span']`                                                    | Custom list of selectors for aggressive property append |
-| `backgroundColor`                 | `#000`                                                        | Backgound color |
-| `altBgColor`                      | `#fff`                                                        | Alternative background color |
-| `textColor`                       | `#fff`                                                        | Text color |
-| `linkColor`                       | `#fcff3c`                                                     | Link color |
-| `linkHoverBgColor`                | `#fff`                                                        | Link hover bacground color |
-| `linkHoverColor`                  | `#000`                                                        | Link hover color |
-| `borderColor`                     | `#fff`                                                        | Border color |
-| `disableShadow`                   | `true`                                                        | Disable shadow |
+| Name                              | Default Value                                      | Description    |
+|:----------------------------------|:---------------------------------------------------|:---------------|
+| `aggressiveHC`                    | `true`                                             | Will append properties even if they do not exist |
+| `aggressiveHCDefaultSelectorList` | `['h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+'p', 'li', 'th', 'td']` | Default list of selectors for aggressive property append |
+| `aggressiveHCCustomSelectorList`  | `['span']`                                         | Custom list of selectors for aggressive property append |
+| `backgroundColor`                 | `#000`                                             | Backgound color |
+| `altBgColor`                      | `#fff`                                             | Alternative background color |
+| `textColor`                       | `#fff`                                             | Text color |
+| `linkColor`                       | `#fcff3c`                                          | Link color |
+| `linkHoverBgColor`                | `#fff`                                             | Link hover bacground color |
+| `linkHoverColor`                  | `#000`                                             | Link hover color |
+| `borderColor`                     | `#fff`                                             | Border color |
+| `disableShadow`                   | `true`                                             | Disable shadow |
 | `imageFilter`                     | `false`/`invert(100%)`/`grayscale(100%)`/`contrast(200%)`     | Image Filter (disabled by default). `false` to disable. Any css filter option can be passed|
-| `imageSelectors`                  | `['img']`                                                     | Default list of image selectors to apply `imageFilter`|
+| `imageSelectors`                  | `['img']`                                           | Default list of image selectors to apply `imageFilter`|
+| `removeCSSProps`                  | `false`                                             | This option will remove all unused CSS selectors or properties for better optimization. Use CSS minifiers like CSSNano or CSSO to merge selectors|
+| `CSSPropsWhiteList`               | `['background',
+'background-color', 'color', 'border', 'border-top', 'border-bottom',
+'border-left', 'border-right', 'border-color', 'border-top-color', 'border-right-color',
+'border-bottom-color', 'border-left-color', 'box-shadow', 'filter', 'text-shadow']`       | CSS properties whitelist |
 
 
 ## Used by

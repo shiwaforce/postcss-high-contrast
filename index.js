@@ -15,7 +15,11 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		borderColor: '#fff',
 		disableShadow: true,
 		imageFilter: 'invert(100%)',
-		imageSelectors: ['img']
+		imageSelectors: ['img'],
+		removeCSSProps: false,
+		CSSPropsWhiteList: ['background', 'background-color', 'color', 'border', 'border-top', 'border-bottom',
+			'border-left', 'border-right', 'border-color', 'border-top-color', 'border-right-color',
+			'border-bottom-color', 'border-left-color', 'box-shadow', 'filter', 'text-shadow']
 	}, opts);
 
 	var pattern = /(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|(rgb|rgba)\((?:\s*\d{1,3}\s*%?\s*,?\s*){3,4}\))/;
@@ -197,7 +201,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 			}
 		});
 
-		if(opts.imageFilter) {
+		if (opts.imageFilter) {
 			css.walkRules( function (rule) {
 				var hasFilter = rule.nodes.filter( function (node) {
 					var props = ['filter'];
@@ -215,6 +219,20 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 							}
 						});
 					}
+				}
+			});
+		}
+
+		if (opts.removeCSSProps) {
+			css.walkDecls( function (decl) {
+				if (!propInArray(opts.CSSPropsWhiteList, decl.prop)) {
+					decl.remove();
+				}
+			});
+
+			css.walkRules( function (rule) {
+				if (!rule.nodes.length) {
+					rule.remove();
 				}
 			});
 		}
