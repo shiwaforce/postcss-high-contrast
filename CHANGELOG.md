@@ -1,3 +1,5 @@
+# 1.2.0
+- remove css props option
 # 1.1.0
 - image filter
 # 1.0.3
