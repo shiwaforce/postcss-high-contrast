@@ -25,17 +25,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 	var pattern = /(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|(rgb|rgba)\((?:\s*\d{1,3}\s*%?\s*,?\s*){3,4}\))/;
 
 	function propInArray(array, prop) {
-		var SELECTOR_SPLIT_PATTERN = /[. #:]/;
-		var retValue = false;
-		var selectors = prop.split(SELECTOR_SPLIT_PATTERN);
-
-		for (var i = 0; i < selectors.length; i++) {
-			if (array.indexOf(selectors[i]) !== -1) {
-				retValue = true;
-				break;
-			}
-		}
-		return retValue;
+		return array.indexOf(prop) > -1;
 	}
 
 	return function (css) {
