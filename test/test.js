@@ -8,6 +8,10 @@ function run(t, input, output) {
 		backgroundColor: '#000',
 		altBgColor: '#fff',
 		textColor: '#fff',
+		buttonSelector: ['button'],
+		buttonColor: '#000',
+		buttonBackgroundColor: '#fcff3c',
+		buttonBorderColor: 'none',
 		linkColor: '#fcff3c',
 		linkHoverColor: '#000',
 		borderColor: '#fff'
@@ -17,6 +21,44 @@ function run(t, input, output) {
 			t.same(result.warnings().length, 0);
 		});
 }
+
+test('Wrong button background color property value', t => {
+	return run(
+		t,
+		`button {
+			background-color: #000;
+		}`,
+		`button {
+			background-color: #fcff3c;
+		}`
+	);
+});
+
+test('Wrong button color property value', t => {
+	return run(
+		t,
+		`button {
+			color: #fff;
+		}`,
+		`button {
+			color: #fcff3c;
+		}`
+	);
+});
+
+test('Wrong button border color property value', t => {
+	return run(
+		t,
+		`button {
+			border: solid 1px #fff;
+			border-color: #000;
+		}`,
+		`button {
+			border: solid 1px none;
+			border-color: none;
+		}`
+	);
+});
 
 test('body doesn\'t have background property', t => {
 	return run(
@@ -57,7 +99,46 @@ test('span has wrong background property value and misses color', t => {
 	);
 });
 
-test('Color doesn\'t match!', t => {
+test('Backgound-color property with rgb value doesn\'t match!', t => {
+	return run(
+		t,
+		`div {
+			background: rgb(255,255,255);
+		}`,
+		`div {
+			background: #000;
+			color: #fff;
+		}`
+	);
+});
+
+test('Backgound-color property with rgba value doesn\'t match!', t => {
+	return run(
+		t,
+		`div {
+			background: rgb(255,255,255,.5);
+		}`,
+		`div {
+			background: #000;
+			color: #fff;
+		}`
+	);
+});
+
+test('Backgound-color property with linear-gradient value doesn\'t match!', t => {
+	return run(
+		t,
+		`div {
+			background: linear-gradient( 0deg, blue, green 40%, red );
+		}`,
+		`div {
+			background: #000;
+			color: #fff;
+		}`
+	);
+});
+
+test('Link color doesn\'t match!', t => {
 	return run(
 		t,
 		`a {
@@ -69,7 +150,19 @@ test('Color doesn\'t match!', t => {
 	);
 });
 
-test('Color doesn\'t match!', t => {
+test('Link linear gradient color wasn\'t replaced!', t => {
+	return run(
+		t,
+		`a {
+			color: linear-gradient( 0deg, blue, green 40%, red );
+		}`,
+		`a {
+			color: #fcff3c;
+		}`
+	);
+});
+
+test('Paragraph color doesn\'t match!', t => {
 	return run(
 		t,
 		`p {

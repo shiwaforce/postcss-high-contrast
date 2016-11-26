@@ -7,8 +7,11 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		aggressiveHCDefaultSelectorList: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'th', 'td'],
 		aggressiveHCCustomSelectorList: ['div', 'span'],
 		backgroundColor: '#000',
-		altBgColor: '#fff',
 		textColor: '#fff',
+		buttonSelector: ['button'],
+		buttonColor: '#000',
+		buttonBackgroundColor: '#fcff3c',
+		buttonBorderColor: 'none',
 		linkColor: '#fcff3c',
 		linkHoverColor: '#000',
 		linkHoverBgColor: '#000',
@@ -22,7 +25,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 			'border-bottom-color', 'border-left-color', 'box-shadow', 'filter', 'text-shadow']
 	}, opts);
 
-	var pattern = /(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|(rgb|rgba)\((?:\s*\d{1,3}\s*%?\s*,?\s*){3,4}\))/;
+	var pattern = /(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|(rgb|rgba)\(.*\))|(linear-gradient)\(.*\)/;
 
 	function propInArray(array, prop) {
 		return array.indexOf(prop) > -1;
@@ -87,7 +90,11 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		css.walkDecls( function (decl) {
 			// Background Colors
 			if ((decl.prop === 'background-color') || (decl.prop === 'background')) {
-				if (pattern.test(decl.value)) {
+				if (pattern.test(decl.value) && propInArray(opts.buttonSelector, decl.parent.selector)) {
+					decl.value = decl.value.replace(pattern, opts.buttonBackgroundColor);
+				}
+
+				if (pattern.test(decl.value) && !propInArray(opts.buttonSelector, decl.parent.selector)) {
 					decl.value = decl.value.replace(pattern, opts.backgroundColor);
 				}
 			}
@@ -106,8 +113,13 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 					});
 				}
 
+				if (decl.parent && propInArray(opts.buttonSelector, decl.parent.selector)) {
+					decl.value = opts.linkColor;
+				}
+
 				// Text Color
-				if (pattern.test(decl.value) && !propInArray(['a'], decl.parent.selector)) {
+				if (pattern.test(decl.value) && !propInArray(['a'], decl.parent.selector)
+					&& !propInArray(opts.buttonSelector, decl.parent.selector)) {
 					decl.value = opts.textColor;
 				}
 			}
@@ -118,11 +130,15 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 				'border-top',
 				'border-right',
 				'border-bottom',
-				'border-left',
+				'border-left'
 			];
 
 			if (propInArray(borderProps, decl.prop)) {
-				if (pattern.test(decl.value)) {
+				if (pattern.test(decl.value) && propInArray(opts.buttonSelector, decl.parent.selector)) {
+					decl.value = decl.value.replace(pattern, opts.buttonBorderColor);
+				}
+
+				if (pattern.test(decl.value) && !propInArray(opts.buttonSelector, decl.parent.selector)) {
 					decl.value = decl.value.replace(pattern, opts.borderColor);
 				}
 			}
@@ -132,11 +148,15 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 				'border-top-color',
 				'border-right-color',
 				'border-bottom-color',
-				'border-left-color',
+				'border-left-color'
 			];
 
 			if (propInArray(borderColorProps, decl.prop)) {
-				if (pattern.test(decl.value)) {
+				if (pattern.test(decl.value) && propInArray(opts.buttonSelector, decl.parent.selector)) {
+					decl.value = decl.value.replace(pattern, opts.buttonBorderColor);
+				}
+
+				if (pattern.test(decl.value) && !propInArray(opts.buttonSelector, decl.parent.selector)) {
 					decl.value = opts.borderColor;
 				}
 			}

@@ -26,6 +26,11 @@ postcss([
 
 		textColor: '#fff',
 
+		buttonSelector: ['button'],
+		buttonColor: '#000',
+		buttonBackgroundColor: '#fcff3c',
+		buttonBorderColor: 'none',
+
 		linkColor: '#fcff3c',
 		linkHoverColor: '#fcff3c',
 
@@ -170,6 +175,10 @@ Tip: use cookies to remember turned on high contrast css on different sessions a
 | `backgroundColor`                 | `#000`                                             | Backgound color |
 | `altBgColor`                      | `#fff`                                             | Alternative background color |
 | `textColor`                       | `#fff`                                             | Text color |
+| `buttonSelector`                  | `[button]`                                         | Button Selector |
+| `buttonColor`                     | `#000`                                             | Button color |
+| `buttonBackgroundColor`           | `#fcff3c`                                          | Button background color |
+| `buttonBorderColor`               | `none`                                             | Button border color |
 | `linkColor`                       | `#fcff3c`                                          | Link color |
 | `linkHoverBgColor`                | `#fff`                                             | Link hover bacground color |
 | `linkHoverColor`                  | `#000`                                             | Link hover color |
