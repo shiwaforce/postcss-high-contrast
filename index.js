@@ -86,13 +86,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 
 		css.walkDecls( function (decl) {
 			// Background Colors
-			if (decl.prop === 'background') {
-				if (pattern.test(decl.value)) {
-					decl.value = decl.value.replace(pattern, opts.backgroundColor);
-				}
-			}
-
-			if (decl.prop === 'background-color') {
+			if ((decl.prop === 'background-color') || (decl.prop === 'background')) {
 				if (pattern.test(decl.value)) {
 					decl.value = decl.value.replace(pattern, opts.backgroundColor);
 				}
@@ -119,61 +113,29 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 			}
 
 			// Border Colors
-			if (decl.prop === 'border') {
+			var borderProps = [
+				'border',
+				'border-top',
+				'border-right',
+				'border-bottom',
+				'border-left',
+			];
+
+			if (propInArray(borderProps, decl.prop)) {
 				if (pattern.test(decl.value)) {
 					decl.value = decl.value.replace(pattern, opts.borderColor);
 				}
 			}
 
-			if (decl.prop === 'border-top') {
-				if (pattern.test(decl.value)) {
-					decl.value = decl.value.replace(pattern, opts.borderColor);
-				}
-			}
+			var borderColorProps = [
+				'border-color',
+				'border-top-color',
+				'border-right-color',
+				'border-bottom-color',
+				'border-left-color',
+			];
 
-			if (decl.prop === 'border-right') {
-				if (pattern.test(decl.value)) {
-					decl.value = decl.value.replace(pattern, opts.borderColor);
-				}
-			}
-
-			if (decl.prop === 'border-bottom') {
-				if (pattern.test(decl.value)) {
-					decl.value = decl.value.replace(pattern, opts.borderColor);
-				}
-			}
-
-			if (decl.prop === 'border-left') {
-				if (pattern.test(decl.value)) {
-					decl.value = decl.value.replace(pattern, opts.borderColor);
-				}
-			}
-
-			if (decl.prop === 'border-color') {
-				if (pattern.test(decl.value)) {
-					decl.value = opts.borderColor;
-				}
-			}
-
-			if (decl.prop === 'border-top-color') {
-				if (pattern.test(decl.value)) {
-					decl.value = opts.borderColor;
-				}
-			}
-
-			if (decl.prop === 'border-right-color') {
-				if (pattern.test(decl.value)) {
-					decl.value = opts.borderColor;
-				}
-			}
-
-			if (decl.prop === 'border-bottom-color') {
-				if (pattern.test(decl.value)) {
-					decl.value = opts.borderColor;
-				}
-			}
-
-			if (decl.prop === 'border-left-color') {
+			if (propInArray(borderColorProps, decl.prop)) {
 				if (pattern.test(decl.value)) {
 					decl.value = opts.borderColor;
 				}
