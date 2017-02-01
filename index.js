@@ -101,6 +101,13 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 
 			// Colors
 			if (decl.prop === 'color') {
+				
+				// Text Color
+				if (pattern.test(decl.value) && !propInArray(['a'], decl.parent.selector)
+					&& !propInArray(opts.buttonSelector, decl.parent.selector)) {
+					decl.value = opts.textColor;
+				}
+				
 				if (decl.parent && propInArray(['a'], decl.parent.selector)) {
 					decl.value = opts.linkColor;
 				}
@@ -117,11 +124,6 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 					decl.value = opts.buttonColor;
 				}
 
-				// Text Color
-				if (pattern.test(decl.value) && !propInArray(['a'], decl.parent.selector)
-					&& !propInArray(opts.buttonSelector, decl.parent.selector)) {
-					decl.value = opts.textColor;
-				}
 			}
 
 			// Border Colors
