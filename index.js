@@ -114,7 +114,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 				}
 
 				if (decl.parent && propInArray(opts.buttonSelector, decl.parent.selector)) {
-					decl.value = opts.linkColor;
+					decl.value = opts.buttonColor;
 				}
 
 				// Text Color
