@@ -94,7 +94,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 					decl.value = decl.value.replace(pattern, opts.buttonBackgroundColor);
 				}
 
-				if (pattern.test(decl.value) && !propInArray(opts.buttonSelector, decl.parent.selector)) {
+				if (pattern.test(decl.value) && !propInArray(opts.buttonSelector, decl.parent.selector) && !propInArray(['a:hover'], decl.parent.selector)) {
 					decl.value = decl.value.replace(pattern, opts.backgroundColor);
 				}
 			}
