@@ -1,3 +1,7 @@
+# 1.3.1
+- Stopped linkHoverBgColor from being removed by backgroundColor [#20](https://github.com/iamfrntdv/postcss-high-contrast/pull/20)
+- Stopping text color from overwriting link hover color [#19](https://github.com/iamfrntdv/postcss-high-contrast/pull/19)
+- Fix for buttonColor [#18](https://github.com/iamfrntdv/postcss-high-contrast/pull/18)
 # 1.3.0
 - now you can add style for button elements separately.
 - regex update for better matching color values like rgb, rgba, linear-gradient

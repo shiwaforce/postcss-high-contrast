@@ -41,7 +41,7 @@ test('Wrong button color property value', t => {
 			color: #fff;
 		}`,
 		`button {
-			color: #fcff3c;
+			color: #000;
 		}`
 	);
 });
