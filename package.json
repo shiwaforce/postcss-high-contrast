@@ -11,11 +11,11 @@
   ],
   "author": "Eduárd Pocstár <admdh.com@gmail.com>",
   "license": "MIT",
-  "repository": "https://github.com/admdh/postcss-high-contrast",
+  "repository": "https://github.com/iamfrntdv/postcss-high-contrast",
   "bugs": {
-    "url": "https://github.com/admdh/postcss-high-contrast/issues"
+    "url": "https://github.com/iamfrntdv/postcss-high-contrast/issues"
   },
-  "homepage": "https://github.com/admdh/postcss-high-contrast",
+  "homepage": "https://github.com/iamfrntdv/postcss-high-contrast",
   "dependencies": {
     "object-assign": "^4.1.0",
     "postcss": "^5.2.6"
