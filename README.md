@@ -28,12 +28,20 @@ postcss([
 		buttonColor: '#000',
 		buttonBackgroundColor: '#fcff3c',
 		buttonBorderColor: 'none',
-
+		
+		linkSelectors:  ['a'],
 		linkColor: '#fcff3c',
 		linkHoverColor: '#fcff3c',
 
 		borderColor: '#fff',
 		disableShadow: true,
+		
+		customSelectors: ['input'],
+		customSelectorColor: '#fff',
+		customSelectorBackgroundColor: '#000',
+		customSelectorBorderdColor: '#fff',
+		
+		selectorsBlackList: ['textfield'],
 
 		imageFilter: 'invert(100%)',
 		imageSelectors: ['img'],
@@ -190,6 +198,7 @@ Tip: use cookies to remember turned on high contrast css on different sessions a
 
 ## Used by
 [Magyar Posta](https://www.posta.hu)
+[Signal IDUNA](http://www.signal.hu)
 
 ## Works great with:
 [PostCSS Increase Text Sizes](https://github.com/admdh/postcss-increase-text-sizes)
