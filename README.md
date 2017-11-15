@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/iamfrntdv/postcss-high-contrast.svg?branch=master)](https://travis-ci.org/iamfrntdv/postcss-high-contrast)
+[![Build Status](https://travis-ci.org/shiwaforce/postcss-high-contrast.svg?branch=master)](https://travis-ci.org/shiwaforce/postcss-high-contrast)
 # PostCSS High Contrast
 <img align="right" width="108" height="108" title="Philosopher’s stone, logo of PostCSS" src="http://postcss.github.io/postcss/logo.svg" hspace="20">
 PostCSS High Contrast is PostCSS plugin that helps automatically convert all colors to high contrast. This Plugin gives you ability to create high contrast version of your project with ease.
