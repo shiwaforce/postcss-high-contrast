@@ -17,8 +17,8 @@ function run(t, input, output) {
 		borderColor: '#fff'
 	})]).process(input)
 		.then(result => {
-			t.same(result.css, output);
-			t.same(result.warnings().length, 0);
+			t.is(result.css, output);
+			t.is(result.warnings().length, 0);
 		});
 }
 
