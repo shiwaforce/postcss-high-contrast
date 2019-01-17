@@ -1,7 +1,7 @@
-var postcss = require('postcss');
-var assign = require('object-assign');
+const postcss = require('postcss');
+const assign = require('object-assign');
 
-module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
+module.exports = postcss.plugin('postcss-high-contrast', (opts) => {
 	opts = assign({
 		aggressiveHC: true,
 		aggressiveHCDefaultSelectorList: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'th', 'td'],
@@ -32,7 +32,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 			'border-bottom-color', 'border-left-color', 'box-shadow', 'filter', 'text-shadow', 'fill']
 	}, opts);
 
-	var pattern = /(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|(rgb|rgba)\(.*\))|(linear-gradient)\(.*\)/;
+	const pattern = /(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|(rgb|rgba)\(.*\))|(linear-gradient)\(.*\)/;
 
 	function propInArray(array, prop) {
 		return array.indexOf(prop) > -1;
@@ -41,10 +41,10 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 	return function (css) {
 
 		if (opts.aggressiveHC) {
-			css.walkRules( function (rule) {
+			css.walkRules((rule) => {
 
-				var hasColor = rule.nodes.filter( function (node) {
-					var props = ['color'];
+				const hasColor = rule.nodes.filter((node) => {
+					const props = ['color'];
 					return props.indexOf(node.prop) !== -1;
 				}).length;
 
@@ -54,7 +54,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 					if (!hasColor) {
 						rule.append({ prop: 'color', value: opts.textColor });
 					} else {
-						css.walkDecls( function (decl) {
+						css.walkDecls((decl) => {
 							if (decl.prop === 'color') {
 								decl.value = opts.textColor;
 							}
@@ -67,7 +67,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 					if (!hasColor) {
 						rule.append({ prop: 'color', value: opts.textColor });
 					} else {
-						css.walkDecls( function (decl) {
+						css.walkDecls((decl) => {
 							if (decl.prop === 'color') {
 								decl.value = opts.textColor;
 							}
@@ -78,8 +78,8 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 				// Body Overrides
 				if (rule.selector === 'body') {
 					// Check if body has background or background-color
-					var hasBg = rule.nodes.filter( function (node) {
-						var props = ['background', 'background-color'];
+					const hasBg = rule.nodes.filter((node) => {
+						const props = ['background', 'background-color'];
 						return props.indexOf(node.prop) !== -1;
 					}).length;
 
@@ -94,7 +94,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 			});
 		}
 
-		css.walkDecls( function (decl) {
+		css.walkDecls((decl) => {
 			// Background Colors
 			if (decl.prop === 'background-color' || decl.prop === 'background') {
 				if (pattern.test(decl.value) &&
@@ -154,7 +154,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 
 
 			// Border Colors
-			var borderProps = [
+			const borderProps = [
 				'border',
 				'border-top',
 				'border-right',
@@ -181,7 +181,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 				}
 			}
 
-			var borderColorProps = [
+			const borderColorProps = [
 				'border-color',
 				'border-top-color',
 				'border-right-color',
@@ -221,9 +221,9 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		});
 
 		if (opts.imageFilter) {
-			css.walkRules( function (rule) {
-				var hasFilter = rule.nodes.filter( function (node) {
-					var props = ['filter'];
+			css.walkRules((rule) => {
+				const hasFilter = rule.nodes.filter((node) => {
+					const props = ['filter'];
 					return props.indexOf(node.prop) !== -1;
 				}).length;
 
@@ -232,7 +232,7 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 					if (!hasFilter) {
 						rule.append({ prop: 'filter', value: opts.imageFilter });
 					} else {
-						css.walkDecls( function (decl) {
+						css.walkDecls((decl) => {
 							if (decl.prop === 'filter') {
 								decl.value = opts.imageFilter;
 							}
@@ -243,13 +243,13 @@ module.exports = postcss.plugin('postcss-high-contrast', function (opts) {
 		}
 
 		if (opts.removeCSSProps) {
-			css.walkDecls( function (decl) {
+			css.walkDecls((decl) => {
 				if (!propInArray(opts.CSSPropsWhiteList, decl.prop)) {
 					decl.remove();
 				}
 			});
 
-			css.walkRules( function (rule) {
+			css.walkRules((rule) => {
 				if (!rule.nodes.length) {
 					rule.remove();
 				}

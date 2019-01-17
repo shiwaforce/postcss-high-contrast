@@ -1,3 +1,6 @@
+# 1.6.0
+- Add Fill support [#23](https://github.com/shiwaforce/postcss-high-contrast/pull/23)
+- minor code updates
 # 1.3.1
 - Stopped linkHoverBgColor from being removed by backgroundColor [#20](https://github.com/iamfrntdv/postcss-high-contrast/pull/20)
 - Stopping text color from overwriting link hover color [#19](https://github.com/iamfrntdv/postcss-high-contrast/pull/19)

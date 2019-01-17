@@ -306,15 +306,3 @@ test('Wrong box-shadow property value', t => {
 		}`
 	);
 });
-
-test('Wrong box-shadow property value', t => {
-	return run(
-		t,
-		`label {
-			text-shadow: 0 0 2px #000;
-		}`,
-		`label {
-			text-shadow: none;
-		}`
-	);
-});

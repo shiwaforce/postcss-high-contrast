@@ -1,6 +1,6 @@
 {
   "name": "postcss-high-contrast",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "description": "PostCSS High Contrast is PostCSS plugin that helps automaticaly converts all colors to high contrast",
   "keywords": [
     "postcss",
@@ -18,12 +18,12 @@
   "homepage": "https://github.com/shiwaforce/postcss-high-contrast",
   "dependencies": {
     "object-assign": "^4.1.1",
-    "postcss": "^7.0.2"
+    "postcss": "^7.0.13"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
-    "eslint": "^5.4.0",
-    "eslint-config-postcss": "^3.0.6"
+    "ava": "^1.1.0",
+    "eslint": "^5.12.0",
+    "eslint-config-postcss": "^3.0.7"
   },
   "scripts": {
     "lint": "eslint index.js",
@@ -31,5 +31,8 @@
   },
   "eslintConfig": {
     "extends": "eslint-config-postcss/es5"
-  }
+  },
+	"engines": {
+		"node": ">=6.0.0"
+	}
 }
