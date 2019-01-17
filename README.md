@@ -19,6 +19,8 @@ postcss([
 		aggressiveHCDefaultSelectorList: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'th', 'td'],
 		aggressiveHCCustomSelectorList: ['div', 'span'],
 
+		colorProps: ['color', 'fill'],
+
 		backgroundColor: '#000',
 		altBgColor: '#fff',
 
@@ -49,7 +51,7 @@ postcss([
 		removeCSSProps: false,
         CSSPropsWhiteList: ['background', 'background-color', 'color', 'border', 'border-top', 'border-bottom',
             'border-left', 'border-right', 'border-color', 'border-top-color', 'border-right-color',
-            'border-bottom-color', 'border-left-color', 'box-shadow', 'filter', 'text-shadow']
+            'border-bottom-color', 'border-left-color', 'box-shadow', 'filter', 'text-shadow', 'fill']
 	})
 ]);
 
@@ -175,9 +177,9 @@ Tip: use cookies to remember turned on high contrast css on different sessions a
 | Name                              | Default Value                                      | Description    |
 |:----------------------------------|:---------------------------------------------------|:---------------|
 | `aggressiveHC`                    | `true`                                             | Will append properties even if they do not exist |
-| `aggressiveHCDefaultSelectorList` | `['h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-'p', 'li', 'th', 'td']` | Default list of selectors for aggressive property append |
+| `aggressiveHCDefaultSelectorList` | `['h1', 'h2', 'h3', 'h4', 'h5', 'h6','p', 'li', 'th', 'td']` | Default list of selectors for aggressive property append |
 | `aggressiveHCCustomSelectorList`  | `['span']`                                         | Custom list of selectors for aggressive property append |
+| `colorProps     `                 | `['color','fill']`                                 | List of Properties that will be considered for color changing |
 | `backgroundColor`                 | `#000`                                             | Backgound color |
 | `altBgColor`                      | `#fff`                                             | Alternative background color |
 | `textColor`                       | `#fff`                                             | Text color |
