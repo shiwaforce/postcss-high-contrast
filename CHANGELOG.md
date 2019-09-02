@@ -1,3 +1,5 @@
+# 1.6.2
+- dependencies update
 # 1.6.0
 - Add Fill support [#23](https://github.com/shiwaforce/postcss-high-contrast/pull/23)
 - minor code updates
