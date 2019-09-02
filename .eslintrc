@@ -110,6 +110,10 @@
       'semi':                        [2, 'always'],
       'yoda':                        [2, 'never']
   },
+  'parserOptions': {
+    'ecmaVersion': 6,
+    'sourceType': 'module'
+  },
   'globals': {
       'Promise': false
   },

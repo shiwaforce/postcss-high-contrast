@@ -29,9 +29,6 @@
     "lint": "eslint index.js",
     "test": "ava && eslint test/test.js"
   },
-  "eslintConfig": {
-    "extends": "eslint-config-postcss/es5"
-  },
   "engines": {
     "node": ">=8.0.0"
   }

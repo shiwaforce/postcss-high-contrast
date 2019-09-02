@@ -1,7 +1,7 @@
-import postcss from 'postcss';
-import test from 'ava';
+const postcss = require('postcss');
+const test = require('ava');
 
-import plugin from '../';
+const plugin = require('../index.js');
 
 function run(t, input, output) {
 	return postcss([plugin({
