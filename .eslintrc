@@ -110,9 +110,6 @@
       'semi':                        [2, 'always'],
       'yoda':                        [2, 'never']
   },
-  'parserOptions': {
-      'sourceType': 'module'
-  },
   'globals': {
       'Promise': false
   },
