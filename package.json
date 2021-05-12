@@ -18,7 +18,7 @@
   "homepage": "https://github.com/shiwaforce/postcss-high-contrast",
   "dependencies": {
     "object-assign": "^4.1.1",
-    "postcss": "^7.0.17"
+    "postcss": "^8.2.10"
   },
   "devDependencies": {
     "ava": "^2.3.0",
